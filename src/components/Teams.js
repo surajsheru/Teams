@@ -6,7 +6,12 @@ import readXlsxFile  from 'read-excel-file'
 import sh  from 'read-excel-file'
 import second from 'read-excel-file'
 import Fload from './Fload';
-
+// const send = require('gmail-send')({
+//   user: 'aits.cse.nba1234@gmail.com',
+//   pass: 'dontopen',
+//   to:   'surajsheru@gmail.com',
+//   subject: 'test subject',
+// });
 function Teams() {
     let main=[],test=[],result=[],show=[];
     let difference=[],di=[];
@@ -92,6 +97,14 @@ input.addEventListener("change",()=>{
     });
     //document.writeln("<h1>Absenties numbers:"+shdate+"</h1>")
      console.log("abs"+difference)
+     let  list=difference.toString();
+    //  //send mail
+    //  send({
+    //   text:    "suraj",  
+    // }, (error, result, fullResult) => {
+    //   if (error) console.error(error);
+    //   console.log(result);
+    // })
      difference.map((reptile) => {
             
            //document.writeln(reptile+",\n")
@@ -103,22 +116,33 @@ input.addEventListener("change",()=>{
      };
      return (
         
-        <div style={{float:"inherit"}}>
-        <div>
-             <h1>Upload FILE </h1>
-            <input type="file" id="input" />
-            <button onClick={ReptileListItems}>CLICK FOR Absent Numbers</button>
-      </div>
-            <table  border='1' >     <tr>
-              <td>Present</td><td>Absent</td></tr><tr>
-             <td><table>
-           {
+        <div className='container-fluid'>
+        <div className="row">
+             <div className="col"><h1>Upload FILE </h1></div></div>
+            <div className="row">
+              <div className="col-8"><input type="file" id="input" /></div>
+              <div className="col-4"><button onClick={ReptileListItems}>CLICK FOR Absent Numbers</button></div>
+            </div>            
+              <div className="row">
 
-            showpre.map((item)=><tr key={item}><td>{item}</td></tr>)}</table></td>
-            <td><table style={{textAlign:"top"}}>
+              <div className="col-6">
+              <table  className="table table-bordered">   
+                <tr><td >PRESENT</td></tr>
+               <tr><td> {
+
+showpre.map((item)=><li key={item}>{item}</li>)} </td></tr> 
+           
+            
+            </table></div> 
+            
+            <div className="col-6">
+            <table className="table table-bordered">
+            <tr><td>ABSENT NUMBERS</td></tr>
             {   
             showabs.map((item)=><tr key={item}><td>{item}</td></tr>)
-            }</table></td></tr></table>
+            }</table>
+            </div>
+             </div>
         </div>
     )
 }
